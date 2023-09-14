@@ -1,4 +1,7 @@
+@import "variables";
+
 .product-card {
+  color: $dark;
   img {
     max-height: 250px;
     max-width: 250px;

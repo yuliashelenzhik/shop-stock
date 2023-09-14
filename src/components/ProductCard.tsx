@@ -2,11 +2,14 @@ import React from "react";
 import "../styles/productCard.scss";
 
 const ProductCard = (props: any) => {
-  console.log(props.props);
+  console.log(props.product);
   return (
-    <div key={props.props.id} className="product-card">
-      <img src={props.props.image} alt={props.props.title} />
-      <h3>{props.props.title}</h3>
+    <div className="product-card">
+      <img src={props.product.image} alt={props.product.title} />
+      <h3>{props.product.title}</h3>
+      <p>{props.product.description}</p>
+      <p>{props.product.category}</p>
+      <p>{props.product.price}</p>
     </div>
   );
 };

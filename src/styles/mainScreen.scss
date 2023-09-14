@@ -14,7 +14,6 @@
     font-size: 4rem;
     color: $light;
     text-transform: uppercase;
-
     // &:after {
     //   content: "";
     //   width: 30vw;
@@ -39,4 +38,9 @@
   //     border-radius: 12px;
   //     border: 1px solid rgba(255, 255, 255, 0.18);
   //   }
+  .products-container {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
 }

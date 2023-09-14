@@ -1,8 +1,8 @@
 interface Product {
-  id?: any;
-  image?: any;
+  id?: number;
+  image?: string;
   title?: string;
   desc?: string;
-  category?: any;
-  price?: any;
+  category?: string;
+  price?: number;
 }
