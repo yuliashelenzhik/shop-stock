@@ -14,33 +14,14 @@
     font-size: 4rem;
     color: $light;
     text-transform: uppercase;
-    // &:after {
-    //   content: "";
-    //   width: 30vw;
-    //   height: 30vw;
-    //   background-color: $pink-transp;
-    //   border-radius: 50%;
-    //   position: absolute;
-    //   top: 0;
-    //   left: 50%;
-    //   transform: translate(-50%, -50%);
-    //   -webkit-box-shadow: 0px 0px 207px 121px rgba(247, 37, 131, 0.48);
-    //   -moz-box-shadow: 0px 0px 207px 121px rgba(247, 37, 131, 0.48);
-    //   box-shadow: 0px 0px 207px 121px rgba(247, 37, 131, 0.48);
-    // }
   }
-  //   .products-container {
-  //     width: 70%;
-  //     background: rgba(255, 255, 255, 0.15);
-  //     box-shadow: 0 8px 32px 0 $pink-transp;
-  //     backdrop-filter: blur(8px);
-  //     -webkit-backdrop-filter: blur(8px);
-  //     border-radius: 12px;
-  //     border: 1px solid rgba(255, 255, 255, 0.18);
-  //   }
+
   .products-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-evenly;
+    // flex-direction: column;
     gap: 48px;
+    flex-wrap: wrap;
+    padding: 24px;
   }
 }

@@ -2,8 +2,17 @@
 
 .product-card {
   color: $dark;
-  img {
-    max-height: 250px;
-    max-width: 250px;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  & img {
+    max-height: 200px;
+    max-width: 200px;
+  }
+  & p {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

@@ -2,12 +2,19 @@ import React from "react";
 import "../styles/productCard.scss";
 
 const ProductCard = (props: any) => {
-  console.log(props.product);
+  function truncate(string: string) {
+    return string.length > 30 ? string.substring(0, 31) : string;
+  }
+
+  //   console.log(props.product);
   return (
     <div className="product-card">
       <img src={props.product.image} alt={props.product.title} />
       <h3>{props.product.title}</h3>
-      <p>{props.product.description}</p>
+      <p>
+        {truncate(props.product.description)}
+        {props.product.description.length > 30 ? <span>...</span> : ""}
+      </p>
       <p>{props.product.category}</p>
       <p>{props.product.price}</p>
     </div>

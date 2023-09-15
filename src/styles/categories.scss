@@ -1,0 +1,54 @@
+@import "variables";
+
+.categories {
+  background-color: $light-transp;
+  border-radius: 12px;
+  padding: 12px 24px;
+  position: relative;
+  min-width: 250px;
+  .categories-title {
+    display: flex;
+    justify-content: space-between;
+  }
+  & p {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $dark;
+    cursor: pointer;
+    text-align: left;
+  }
+  .category-options {
+    margin-top: 2px;
+    background-color: $light-transp;
+    border-radius: 12px;
+    // background-color: #fff;
+    min-width: 250px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px 24px;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .category-item {
+    :hover {
+      color: #d01a26;
+    }
+    & input {
+      visibility: hidden;
+      position: absolute;
+    }
+    & label {
+      cursor: pointer;
+      text-transform: capitalize;
+      font-weight: bold;
+      color: $dark;
+    }
+  }
+}
