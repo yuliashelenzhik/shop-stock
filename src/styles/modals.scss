@@ -1,0 +1,76 @@
+@import "variables";
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 300px;
+  padding: 24px;
+  background-color: $light;
+  border-radius: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .modal-header {
+    color: $dark;
+    text-transform: uppercase;
+  }
+  .modal-body {
+    display: grid;
+    // grid-template-columns: 1fr 1fr;
+    // display: flex;
+    // flex-direction: column;
+    gap: 6px;
+    & input {
+      min-width: 250px;
+      font-size: 1rem;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+    }
+  }
+  .login-body {
+    gap: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: pink;
+  }
+  .modal-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    .btns-ok-cancel {
+      display: flex;
+      gap: 6px;
+      justify-content: space-evenly;
+      width: 100%;
+    }
+    .ok-btn {
+      background-color: $dark;
+      min-width: 100px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .switch-link {
+      background-color: transparent;
+      border: none;
+      color: $dark;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  }
+}

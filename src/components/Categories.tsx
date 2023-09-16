@@ -3,10 +3,10 @@ import "../styles/categories.scss";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 // import { ProductsState } from "../redux/slices/productsSlice";
 
-const Categories = () => {
+const Categories = (props: any) => {
   const productsSelector = useSelector((state: any) => state.products);
   const [open, setOpen] = useState(false);
-  const [filterCategory, setFilterCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   let categories: Array<string> = ["all"];
   productsSelector.products.forEach((el: Product) => {
@@ -15,44 +15,42 @@ const Categories = () => {
     }
   });
 
+  props.func(selectedCategory);
+
   const handleOpen = () => {
     setOpen(!open);
   };
 
   const onChangeCategory = (e: any) => {
-    console.log(e);
     if (e.target.value !== null && e.target.value !== undefined) {
-      setFilterCategory(e.target.value);
-      console.log(e.target.value);
+      setSelectedCategory(e.target.value);
     }
     setOpen(false);
   };
 
-  useEffect(() => {
-    console.log("filter categ: " + filterCategory);
-  }, [filterCategory]);
-
   return (
-    <div className="categories">
-      <div className="categories-title" onClick={handleOpen}>
-        <p>{filterCategory}</p>
-        <p> {open ? " ▲" : " ▼"} </p>
-      </div>
-      {open && (
-        <div className="category-options">
-          {categories.map((item) => (
-            <div
-              key={item}
-              className="category-item"
-              onChange={onChangeCategory}
-            >
-              <input type="radio" name={item} value={item} id={item} />
-              <label htmlFor={item}>{item}</label>
-            </div>
-          ))}
+    <>
+      <div className="categories">
+        <div className="categories-title" onClick={handleOpen}>
+          <p>{selectedCategory}</p>
+          <p> {open ? " ▲" : " ▼"} </p>
         </div>
-      )}
-    </div>
+        {open && (
+          <div className="category-options">
+            {categories.map((item) => (
+              <div
+                key={item}
+                className="category-item"
+                onChange={onChangeCategory}
+              >
+                <input type="radio" name={item} value={item} id={item} />
+                <label htmlFor={item}>{item}</label>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
