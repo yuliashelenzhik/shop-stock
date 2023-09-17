@@ -19,16 +19,33 @@ interface AuthState {
   error: string | null;
 }
 
-type TokenResponse = {
+interface TokenResponse {
   token: string;
-};
-
-// interface ModalState {
-//   modals: Record<string, boolean>;
-// }
+}
 
 interface ModalState {
   modal: string;
-  data: any;
+  data?: any;
   isVisible: boolean;
+}
+
+interface NewUser {
+  email: string;
+  username: string;
+  password: string;
+  name?: {
+    firstname?: string;
+    lastname?: string;
+  };
+  address?: {
+    city?: string;
+    street?: string;
+    number?: number;
+    zipcode?: string;
+    geolocation?: {
+      lat?: string;
+      long?: string;
+    };
+  };
+  phone?: string;
 }

@@ -4,6 +4,7 @@ import "../../styles/mainScreen.scss";
 import { useAddProductMutation } from "../../api/api";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../redux/slices/modalSlice";
+import { useGetAllProductsQuery } from "../../api/api";
 
 const AddProductModal = (props: any) => {
   const [title, setTitle] = useState("");
@@ -13,6 +14,7 @@ const AddProductModal = (props: any) => {
   const [price, setPrice] = useState(0);
   const [addProduct] = useAddProductMutation();
   const dispatch = useDispatch();
+  const { data } = useGetAllProductsQuery();
 
   const handleAddProduct = async () => {
     try {
@@ -20,6 +22,9 @@ const AddProductModal = (props: any) => {
       const response = await addProduct(productData).unwrap();
       console.log(response);
       dispatch(showModal({ modal: "AddProductModal", isVisible: false }));
+      if (data.refetch) {
+        await data.refetch();
+      }
     } catch (error) {
       console.error("Couln't add new product: ", error);
     }

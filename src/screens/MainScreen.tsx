@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/mainScreen.scss";
-import { useGetAllProductsQuery } from "../api/productsApi";
+import { useGetAllProductsQuery } from "../api/api";
 import ProductCard from "../components/ProductCard";
 import Categories from "../components/Categories";
 import { useDispatch, useSelector } from "react-redux";

@@ -4,14 +4,11 @@ import { useLoginMutation } from "../../api/usersApi";
 import { useDispatch } from "react-redux";
 import { setAuthenticated } from "../../redux/slices/authSlice";
 import { showModal } from "../../redux/slices/modalSlice";
-// import { loginUser, setError, setToken } from "../../redux/slices/authSlice";
-// import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
-// import { SerializedError } from "@reduxjs/toolkit";
 
 const LoginModal = (props: any) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [login, { isError, error, isSuccess }] = useLoginMutation();
+  const [login] = useLoginMutation();
   const dispatch = useDispatch();
 
   const handleLogin = async () => {
@@ -26,42 +23,24 @@ const LoginModal = (props: any) => {
     }
   };
   const goToRegister = () => {
-    console.log("Register");
     dispatch(showModal({ modal: "LoginModal", isVisible: false }));
     dispatch(showModal({ modal: "RegisterModal", isVisible: true }));
   };
-  //   const handleLogin = async () => {
 
-  //     try {
-  //       const data = await login({
-  //         username,
-  //         password,
-  //       });
-  //       if (data) {
-  //         console.log(data);
-  //         //   dispatch(setToken(`Bearer ${data.token}`));
-  //         // dispatch(setToken(`Bearer ${data?.token}`));
-  //       }
-  //     } catch (error: any) {
-  //       dispatch(setError(error.message));
-  //     }
-  //   };
-
-  //   const handleLogin = () => {
-  //     console.log("Hi");
-  //   };
   const body = (
     <div className="login-body">
       <input
         type="text"
         placeholder="Username"
         value={username}
+        autoComplete="off"
         onChange={(e) => setUsername(e.target.value)}
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
+        autoComplete="off"
         onChange={(e) => setPassword(e.target.value)}
       />
     </div>

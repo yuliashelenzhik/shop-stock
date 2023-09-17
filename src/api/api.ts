@@ -66,6 +66,28 @@ export const api = createApi({
           });
       },
     }),
+
+    //Register a new user
+
+    register: builder.mutation<any, NewUser>({
+      query: (user) => ({
+        url: "/users",
+        method: "POST",
+        body: user,
+      }),
+      async onQueryStarted(
+        arg,
+        { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }
+      ) {
+        await queryFulfilled
+          .then((result) => {
+            console.log(result.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+    }),
   }),
 });
 
@@ -74,4 +96,5 @@ export const {
   useLoginMutation,
   useAddProductMutation,
   useRemoveProductMutation,
+  useRegisterMutation,
 } = api;

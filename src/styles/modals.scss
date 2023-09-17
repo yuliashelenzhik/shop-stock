@@ -16,6 +16,12 @@
     color: $dark;
     text-transform: uppercase;
   }
+  & form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
   .modal-body {
     display: grid;
     // grid-template-columns: 1fr 1fr;
@@ -30,11 +36,22 @@
       border: none;
       outline: none;
     }
+    .contact-title {
+      margin-top: 12px;
+      width: 100%;
+      color: $dark;
+      font-weight: bold;
+    }
     .confirm-text {
       font-size: larger;
       color: $dark;
       max-width: 300px;
     }
+  }
+  .modal-wide {
+    grid-template-rows: repeat(7, 1fr);
+    grid-auto-flow: column;
+    column-gap: 24px;
   }
   .login-body {
     gap: 6px;
