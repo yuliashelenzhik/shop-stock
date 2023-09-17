@@ -12,7 +12,6 @@ const LoginModal = (props: any) => {
   const [password, setPassword] = useState("");
   const [login, { isError, error, isSuccess }] = useLoginMutation();
   const dispatch = useDispatch();
-  console.log(props);
 
   const handleLogin = async () => {
     try {

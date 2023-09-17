@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateProducts } from "../redux/slices/productsSlice";
 import RegisterModal from "../components/modals/RegisterModal";
 import LoginModal from "../components/modals/LoginModal";
-import authSlice, { setAuthenticated } from "../redux/slices/authSlice";
-import { RootState } from "@reduxjs/toolkit/dist/query/core/apiState";
+import { setAuthenticated } from "../redux/slices/authSlice";
 import AddProductModal from "../components/modals/AddProductModal";
+import { openModal } from "../redux/slices/modalSlice";
 
 const MainScreen = () => {
   const { data, isSuccess, isLoading, error } = useGetAllProductsQuery();
@@ -22,10 +22,9 @@ const MainScreen = () => {
   const isAuthSelector = useSelector(
     (state: any) => state.auth.isAuthenticated
   );
-  const [showAddProduct, setShowAddProduct] = useState(true);
-  const [filtered, setFiltered] = useState(data);
-
-  console.log(filtered);
+  // const [showAddProduct, setShowAddProduct] = useState(true);
+  // const [filtered, setFiltered] = useState(data);
+  const isAddProdOpen = useSelector((state: any) => state.modal.isVisible);
 
   useEffect(() => {
     setIsLogged(isAuthSelector);
@@ -64,8 +63,9 @@ const MainScreen = () => {
     setSelectedCategory(data);
   };
 
-  console.log("selectedCategory");
-  console.log(selectedCategory);
+  const onAddProduct = () => {
+    dispatch(openModal("AddProductModal"));
+  };
 
   return (
     <div className="main-screen">
@@ -83,14 +83,15 @@ const MainScreen = () => {
       )} */}
       {isLogged && (
         <>
-          {showAddProduct && <AddProductModal />}
+          {isAddProdOpen ? <AddProductModal /> : ""}
+          {/* <AddProductModal /> */}
           <p className="logout-btn" onClick={onLogout}>
             Log out
           </p>
           <h1>Our products</h1>
           <div className="menu">
             <Categories func={getSelectedCategory} />
-            <button>Add a product</button>
+            <button onClick={onAddProduct}>Add a product</button>
           </div>
           <div className="products-container">
             {isLoading ? (

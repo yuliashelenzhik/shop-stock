@@ -3,7 +3,7 @@ import "../../styles/modals.scss";
 
 const DefaultModal = (props: any) => {
   return (
-    <div className="modal">
+    <div className="modal" onClick={(e) => e.stopPropagation()}>
       <h3 className="modal-header">{props.title ?? DefaultModal}</h3>
       <div className="modal-body">{props.body ?? ""}</div>
       <div className="modal-buttons">

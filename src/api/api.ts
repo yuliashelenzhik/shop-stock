@@ -8,6 +8,27 @@ export const api = createApi({
       query: () => "/products",
     }),
 
+    // Add a new product
+    addProduct: builder.mutation<any, Product>({
+      query: (body) => ({
+        url: "/products",
+        method: "POST",
+        body: body,
+      }),
+      async onQueryStarted(
+        arg,
+        { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }
+      ) {
+        await queryFulfilled
+          .then((result) => {
+            console.log(result.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
+    }),
+
     //Login mutation
     login: builder.mutation<any, User>({
       query: (credentials) => ({
@@ -31,4 +52,8 @@ export const api = createApi({
   }),
 });
 
-export const { useGetAllProductsQuery, useLoginMutation } = api;
+export const {
+  useGetAllProductsQuery,
+  useLoginMutation,
+  useAddProductMutation,
+} = api;

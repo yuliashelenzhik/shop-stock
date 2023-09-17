@@ -22,3 +22,12 @@ interface AuthState {
 type TokenResponse = {
   token: string;
 };
+
+// interface ModalState {
+//   modals: Record<string, boolean>;
+// }
+
+interface ModalState {
+  modal: string;
+  isVisible: boolean;
+}
