@@ -4,6 +4,7 @@ import "../../styles/modals.scss";
 const DefaultModal = (props: any) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (props.onClickOk) {
       props.onClickOk();
     }
@@ -17,14 +18,10 @@ const DefaultModal = (props: any) => {
         </div>
         <div className="modal-buttons">
           <div className="btns-ok-cancel">
-            <button className="ok-btn" onClick={props.onClickOk}>
+            <button className="ok-btn" onClick={props.onClickOk} type="submit">
               {props.button ?? "Ok"}
             </button>
-            {props.onClickCancel && (
-              <button className="ok-btn" type="submit">
-                Cancel
-              </button>
-            )}
+            {props.onClickCancel && <button className="ok-btn">Cancel</button>}
           </div>
           {props.switchModal && (
             <button className="switch-link" onClick={props.onSwitchModal}>

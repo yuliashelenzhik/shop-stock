@@ -95,4 +95,13 @@
       cursor: pointer;
     }
   }
+  .validation-message {
+    // background-color: lightcoral;
+    padding: 0 12px;
+    text-align: start;
+    font-size: 14px;
+    height: fit-content;
+    color: $red;
+    font-weight: bold;
+  }
 }

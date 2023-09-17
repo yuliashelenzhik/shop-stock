@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DefaultModal from "./DefaultModal";
-import { useLoginMutation } from "../../api/usersApi";
+import { useLoginMutation } from "../../api/api";
 import { useDispatch } from "react-redux";
 import { setAuthenticated } from "../../redux/slices/authSlice";
 import { showModal } from "../../redux/slices/modalSlice";

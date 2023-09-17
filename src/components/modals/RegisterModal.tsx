@@ -26,12 +26,22 @@ const RegisterModal = (props: any) => {
   });
   const [register, { isLoading, isError, error, data }] = useRegisterMutation();
 
-  const handleSignup = async () => {
+  const handleSignup = async (e: React.FormEvent) => {
     console.log("Sign up");
+
     try {
-      const response = await register(newUserData).unwrap();
-      console.log(response);
-      goToLogin();
+      if (
+        isValidEmail(newUserData.email) &&
+        newUserData.email &&
+        newUserData.password &&
+        newUserData.username
+      ) {
+        const response = await register(newUserData).unwrap();
+        console.log(response);
+        goToLogin();
+      } else {
+        console.log("Please correctly fill in the necessary data");
+      }
     } catch (error) {
       console.error("Register failed: ", error);
     }
@@ -51,16 +61,26 @@ const RegisterModal = (props: any) => {
     }
   };
 
+  function isValidEmail(email: string) {
+    const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailPattern.test(email);
+  }
+
   const body = (
     <>
       <input
         type="email"
         placeholder="Email*"
         value={newUserData.email}
-        onChange={(e) =>
-          setNewUserData({ ...newUserData, email: e.target.value })
-        }
+        onChange={(e) => {
+          setNewUserData({ ...newUserData, email: e.target.value });
+        }}
       />
+      {!isValidEmail(newUserData.email) && newUserData.email.length > 0 && (
+        <p className="validation-message">
+          Please enter a valid email address.
+        </p>
+      )}
       <input
         type="text"
         placeholder="Username*"
@@ -71,12 +91,14 @@ const RegisterModal = (props: any) => {
       />
       <input
         type="password"
+        autoComplete="off"
         placeholder="Password*"
         value={passwordCheck}
         onChange={(e) => setPasswordCheck(e.target.value)}
       />
       <input
-        type="text"
+        type="password"
+        autoComplete="off"
         placeholder="Confirm password*"
         value={passwordConfirm}
         onChange={checkPassword}
