@@ -3,7 +3,7 @@ import DefaultModal from "./DefaultModal";
 import "../../styles/mainScreen.scss";
 import { useAddProductMutation } from "../../api/api";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal } from "../../redux/slices/modalSlice";
+import { showModal } from "../../redux/slices/modalSlice";
 
 const AddProductModal = (props: any) => {
   const [title, setTitle] = useState("");
@@ -13,19 +13,20 @@ const AddProductModal = (props: any) => {
   const [price, setPrice] = useState(0);
   const [addProduct, { isError, error, isSuccess }] = useAddProductMutation();
   const dispatch = useDispatch();
+
   const handleAddProduct = async () => {
     try {
       const productData = { title, image, description, category, price };
       const response = await addProduct(productData).unwrap();
       console.log(response);
-      dispatch(closeModal("AddProductModal"));
+      dispatch(showModal({ modal: "AddProductModal", isVisible: false }));
     } catch (error) {
       console.error("Couln't add new product: ", error);
     }
   };
 
   const handleCancel = () => {
-    dispatch(closeModal("AddProductModal"));
+    dispatch(showModal({ modal: "AddProductModal", isVisible: false }));
   };
 
   const body = (
@@ -63,8 +64,6 @@ const AddProductModal = (props: any) => {
     </>
   );
   return (
-    // <>
-    //   {isOpen && (
     <div className="blur-bg" onClick={handleCancel}>
       <DefaultModal
         title="Add a new product"
@@ -73,8 +72,6 @@ const AddProductModal = (props: any) => {
         onClickCancel={handleCancel}
       />
     </div>
-    //   )}
-    // </>
   );
 };
 

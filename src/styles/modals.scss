@@ -30,6 +30,11 @@
       border: none;
       outline: none;
     }
+    .confirm-text {
+      font-size: larger;
+      color: $dark;
+      max-width: 300px;
+    }
   }
   .login-body {
     gap: 6px;

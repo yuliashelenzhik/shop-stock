@@ -29,5 +29,6 @@ type TokenResponse = {
 
 interface ModalState {
   modal: string;
+  data: any;
   isVisible: boolean;
 }

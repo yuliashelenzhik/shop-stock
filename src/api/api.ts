@@ -29,6 +29,23 @@ export const api = createApi({
       },
     }),
 
+    //Remove a product
+
+    removeProduct: builder.mutation<void, number>({
+      query: (productId) => ({
+        url: `/products/${productId}`,
+        method: "DELETE",
+      }),
+      async onQueryStarted(
+        arg,
+        { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }
+      ) {
+        await queryFulfilled.catch((error) => {
+          console.log(error);
+        });
+      },
+    }),
+
     //Login mutation
     login: builder.mutation<any, User>({
       query: (credentials) => ({
@@ -56,4 +73,5 @@ export const {
   useGetAllProductsQuery,
   useLoginMutation,
   useAddProductMutation,
+  useRemoveProductMutation,
 } = api;
