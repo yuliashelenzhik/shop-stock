@@ -1,10 +1,20 @@
 import React from "react";
 import DefaultModal from "./DefaultModal";
+import { useDispatch } from "react-redux";
+import { showModal } from "../../redux/slices/modalSlice";
 
 const RegisterModal = (props: any) => {
+  const dispatch = useDispatch();
+
   const handleSignup = () => {
     console.log("Sign up");
   };
+
+  const goToLogin = () => {
+    dispatch(showModal({ modal: "RegisterModal", isVisible: false }));
+    dispatch(showModal({ modal: "LoginModal", isVisible: true }));
+  };
+
   const body = (
     <>
       <input type="email" placeholder="Email*" />
@@ -24,7 +34,8 @@ const RegisterModal = (props: any) => {
         body={body}
         button="Sign up"
         onClickOk={handleSignup}
-        switchModal={props.switchModal}
+        switchModal="Login"
+        onSwitchModal={goToLogin}
       />
     </div>
   );

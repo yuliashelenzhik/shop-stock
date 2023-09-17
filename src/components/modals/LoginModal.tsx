@@ -3,6 +3,7 @@ import DefaultModal from "./DefaultModal";
 import { useLoginMutation } from "../../api/usersApi";
 import { useDispatch } from "react-redux";
 import { setAuthenticated } from "../../redux/slices/authSlice";
+import { showModal } from "../../redux/slices/modalSlice";
 // import { loginUser, setError, setToken } from "../../redux/slices/authSlice";
 // import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 // import { SerializedError } from "@reduxjs/toolkit";
@@ -19,11 +20,16 @@ const LoginModal = (props: any) => {
       const response = await login(credentials).unwrap();
       dispatch(setAuthenticated(true));
       localStorage.setItem("authToken", response.token);
+      dispatch(showModal({ modal: "LoginModal", isVisible: false }));
     } catch (error) {
       console.error("Login failed: ", error);
     }
   };
-
+  const goToRegister = () => {
+    console.log("Register");
+    dispatch(showModal({ modal: "LoginModal", isVisible: false }));
+    dispatch(showModal({ modal: "RegisterModal", isVisible: true }));
+  };
   //   const handleLogin = async () => {
 
   //     try {
@@ -68,7 +74,7 @@ const LoginModal = (props: any) => {
         button="Log in"
         switchModal="Sign up"
         onClickOk={handleLogin}
-        // switchModal={props.sw}
+        onSwitchModal={goToRegister}
       />
     </div>
   );

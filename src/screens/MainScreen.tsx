@@ -15,32 +15,32 @@ import ConfirmRemoveModal from "../components/modals/ConfirmRemoveModal";
 const MainScreen = () => {
   const { data, isSuccess, isLoading, error } = useGetAllProductsQuery();
   const dispatch = useDispatch();
-  const [isLogged, setIsLogged] = useState(
-    localStorage.getItem("authToken") ? true : false
-  );
+  const isLogged = localStorage.getItem("authToken") !== null ?? true;
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedModal, setSelectedModal] = useState("Login");
-  const isAuthSelector = useSelector(
-    (state: any) => state.auth.isAuthenticated
-  );
+  // const isAuthSelector = useSelector(
+  //   (state: any) => state.auth.isAuthenticated
+  // );
   const isConfirmRemoveOpen = useSelector(
     (state: any) =>
       state.modal.isVisible && state.modal.modal === "ConfirmRemoveModal"
   );
-  // const [filtered, setFiltered] = useState(data);
+  const isLoginModalOpen = useSelector(
+    (state: any) => state.modal.isVisible && state.modal.modal === "LoginModal"
+  );
+  const isRegisterModalOpen = useSelector(
+    (state: any) =>
+      state.modal.isVisible && state.modal.modal === "RegisterModal"
+  );
   const isAddProdOpen = useSelector(
     (state: any) =>
       state.modal.isVisible && state.modal.modal === "AddProductModal"
   );
 
-  // useEffect(() => {
-  //   setIsLogged(isAuthSelector);
-  // }, [isAuthSelector]);
-
-  console.log("isAuthSelector");
-  console.log(isAuthSelector);
-  console.log("isLogged");
-  console.log(isLogged);
+  useEffect(() => {
+    if (!isLogged) {
+      dispatch(showModal({ modal: "LoginModal", isVisible: true }));
+    }
+  }, []);
 
   const getProducts = async () => {
     const res = await data;
@@ -54,16 +54,9 @@ const MainScreen = () => {
   getProducts();
 
   const onLogout = () => {
-    console.log("log out");
-    // if (isLogged) {
     localStorage.clear();
     dispatch(setAuthenticated(false));
-    // setIsLogged(false);
-    // }
-  };
-
-  const switchModal = () => {
-    console.log("Switch Modal");
+    dispatch(showModal({ modal: "LoginModal", isVisible: true }));
   };
 
   const getSelectedCategory = (data: string) => {
@@ -76,19 +69,14 @@ const MainScreen = () => {
 
   return (
     <div className="main-screen">
-      {!isLogged && selectedModal === "Login" ? (
-        <LoginModal switchModal={switchModal} />
-      ) : !isLogged && selectedModal === "Login" ? (
-        <RegisterModal switchModal={switchModal} />
-      ) : (
-        ""
-      )}
+      {isLoginModalOpen && <LoginModal />}
+      {isRegisterModalOpen && <RegisterModal />}
+
       {isLogged && (
         <>
           {isAddProdOpen ? <AddProductModal /> : ""}
           {isConfirmRemoveOpen ? <ConfirmRemoveModal /> : ""}
 
-          {/* <AddProductModal /> */}
           <p className="logout-btn" onClick={onLogout}>
             Log out
           </p>

@@ -18,7 +18,7 @@ const DefaultModal = (props: any) => {
           )}
         </div>
         {props.switchModal && (
-          <button className="switch-link">
+          <button className="switch-link" onClick={props.onSwitchModal}>
             {props.switchModal ?? "Log in"}
           </button>
         )}
