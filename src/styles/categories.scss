@@ -21,7 +21,6 @@
     margin-top: 2px;
     background-color: $light-transp;
     border-radius: 12px;
-    // background-color: #fff;
     min-width: 250px;
     position: absolute;
     top: 100%;
@@ -34,6 +33,7 @@
     padding: 12px 24px;
     justify-content: center;
     align-items: flex-start;
+    z-index: 1;
   }
 
   .category-item {

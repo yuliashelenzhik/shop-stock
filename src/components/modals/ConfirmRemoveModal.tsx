@@ -8,7 +8,7 @@ import { showModal } from "../../redux/slices/modalSlice";
 const ConfirmRemoveModal = (props: any) => {
   const productId = useSelector((state: any) => state.modal.data);
   const dispatch = useDispatch();
-  const [removeProduct, { isLoading }] = useRemoveProductMutation();
+  const [removeProduct] = useRemoveProductMutation();
 
   const handleCancel = () => {
     dispatch(showModal({ modal: "ConfirmRemoveModal", isVisible: false }));

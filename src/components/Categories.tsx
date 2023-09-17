@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/categories.scss";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-// import { ProductsState } from "../redux/slices/productsSlice";
 
 const Categories = (props: any) => {
   const productsSelector = useSelector((state: any) => state.products);
@@ -15,7 +14,9 @@ const Categories = (props: any) => {
     }
   });
 
-  props.func(selectedCategory);
+  useEffect(() => {
+    props.func(selectedCategory);
+  }, [selectedCategory, props]);
 
   const handleOpen = () => {
     setOpen(!open);

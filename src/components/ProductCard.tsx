@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/productCard.scss";
 import { ReactComponent as RemoveIcon } from "../assets/icons/trash-delete-bin.svg";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { showModal } from "../redux/slices/modalSlice";
 
 const ProductCard = (props: any) => {

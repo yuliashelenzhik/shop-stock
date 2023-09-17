@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DefaultModal from "./DefaultModal";
 import "../../styles/mainScreen.scss";
 import { useAddProductMutation } from "../../api/api";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { showModal } from "../../redux/slices/modalSlice";
 
 const AddProductModal = (props: any) => {
@@ -11,7 +11,7 @@ const AddProductModal = (props: any) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState(0);
-  const [addProduct, { isError, error, isSuccess }] = useAddProductMutation();
+  const [addProduct] = useAddProductMutation();
   const dispatch = useDispatch();
 
   const handleAddProduct = async () => {
