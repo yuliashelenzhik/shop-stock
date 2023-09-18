@@ -5,9 +5,6 @@ import { useDispatch } from "react-redux";
 import { showModal } from "../redux/slices/modalSlice";
 
 const ProductCard = (props: any) => {
-  // const [description, setDescription] = useState(
-  //   truncate(props.product.description)
-  // );
   const dispatch = useDispatch();
   const shortDescription = truncate(props.product.description);
   const [isDescOpen, setIsDescOpen] = useState(false);
@@ -47,14 +44,6 @@ const ProductCard = (props: any) => {
         </p>
       )}
 
-      {/* <p>
-        {truncate(props.product.description)}
-        {props.product.description.length > 30 ? (
-          <span onClick={toggleFullDescription}>...</span>
-        ) : (
-          ""
-        )}
-      </p> */}
       <p className="prod-detail">{props.product.category}</p>
       <p className="prod-detail">{props.product.price}€</p>
     </div>
