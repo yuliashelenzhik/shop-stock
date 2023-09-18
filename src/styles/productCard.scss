@@ -26,12 +26,12 @@
   & p {
     overflow: hidden;
     text-overflow: ellipsis;
-    & span {
-      cursor: pointer;
-    }
   }
   .prod-detail {
     text-transform: capitalize;
     font-weight: bold;
+  }
+  .description {
+    cursor: pointer;
   }
 }

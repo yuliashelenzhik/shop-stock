@@ -1,0 +1,16 @@
+@import "variables";
+
+button {
+  border-radius: 12px;
+  background-color: $light-transp;
+  border: none;
+  padding: 12px 24px;
+  text-transform: uppercase;
+  color: $dark;
+  font-weight: bold;
+  cursor: pointer;
+
+  & :hover {
+    background-color: blue;
+  }
+}

@@ -11,6 +11,7 @@ import { setAuthenticated } from "../redux/slices/authSlice";
 import AddProductModal from "../components/modals/AddProductModal";
 import { showModal } from "../redux/slices/modalSlice";
 import ConfirmRemoveModal from "../components/modals/ConfirmRemoveModal";
+import DefaultButton from "../components/buttons/DefaultButton";
 
 const MainScreen = () => {
   const { data, isSuccess, isLoading, error } = useGetAllProductsQuery();
@@ -83,7 +84,8 @@ const MainScreen = () => {
           <h1>Our products</h1>
           <div className="menu">
             <Categories func={getSelectedCategory} />
-            <button onClick={onAddProduct}>Add a product</button>
+            <DefaultButton title="Add a product" onClick={onAddProduct} />
+            {/* <button onClick={onAddProduct}>Add a product</button> */}
           </div>
           <div className="products-container">
             {isLoading ? (

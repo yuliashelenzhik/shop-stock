@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/productCard.scss";
 import { ReactComponent as RemoveIcon } from "../assets/icons/trash-delete-bin.svg";
 import { useDispatch } from "react-redux";
 import { showModal } from "../redux/slices/modalSlice";
 
 const ProductCard = (props: any) => {
+  // const [description, setDescription] = useState(
+  //   truncate(props.product.description)
+  // );
   const dispatch = useDispatch();
+  const shortDescription = truncate(props.product.description);
+  const [isDescOpen, setIsDescOpen] = useState(false);
 
   function truncate(string: string) {
-    return string.length > 30 ? string.substring(0, 31) : string;
+    return string.length > 40 ? string.substring(0, 41) : string;
   }
   const toggleFullDescription = () => {
-    console.log("toggleFullDescription");
+    setIsDescOpen(!isDescOpen);
   };
 
   const removeItem = () => {
@@ -33,14 +38,25 @@ const ProductCard = (props: any) => {
       </p>
       <img src={props.product.image} alt={props.product.title} />
       <h3>{props.product.title}</h3>
-      <p>
+      {isDescOpen ? (
+        <p className="description" onClick={toggleFullDescription}>
+          {props.product.description}
+        </p>
+      ) : (
+        <p className="description" onClick={toggleFullDescription}>
+          {shortDescription}{" "}
+          {props.product.description.length > 40 ? <span>...</span> : ""}
+        </p>
+      )}
+
+      {/* <p>
         {truncate(props.product.description)}
         {props.product.description.length > 30 ? (
           <span onClick={toggleFullDescription}>...</span>
         ) : (
           ""
         )}
-      </p>
+      </p> */}
       <p className="prod-detail">{props.product.category}</p>
       <p className="prod-detail">{props.product.price}€</p>
     </div>
