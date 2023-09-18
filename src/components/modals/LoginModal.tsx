@@ -4,12 +4,14 @@ import { useLoginMutation } from "../../api/api";
 import { useDispatch } from "react-redux";
 import { setAuthenticated } from "../../redux/slices/authSlice";
 import { showModal } from "../../redux/slices/modalSlice";
+import { hideToast, showToast } from "../../redux/slices/toastSlice";
 
 const LoginModal = (props: any) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [login] = useLoginMutation();
   const dispatch = useDispatch();
+  // const is;
 
   const handleLogin = async () => {
     try {
@@ -20,6 +22,13 @@ const LoginModal = (props: any) => {
       dispatch(showModal({ modal: "LoginModal", isVisible: false }));
     } catch (error) {
       console.error("Login failed: ", error);
+      console.log(error);
+      dispatch(
+        showToast({ toast: "Login failed", message: error, type: error })
+      );
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 5000);
     }
   };
   const goToRegister = () => {

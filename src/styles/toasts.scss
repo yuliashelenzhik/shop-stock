@@ -1,0 +1,21 @@
+@import "variables";
+
+.success,
+.error {
+  padding: 12px 24px;
+  border-radius: 12px;
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: bold;
+  color: $dark;
+  z-index: 3;
+}
+.success {
+  background-color: $green-transp;
+}
+
+.error {
+  background-color: $red-transp;
+}

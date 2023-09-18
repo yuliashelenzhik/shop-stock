@@ -27,8 +27,6 @@ const RegisterModal = (props: any) => {
   const [register, { isLoading, isError, error, data }] = useRegisterMutation();
 
   const handleSignup = async (e: React.FormEvent) => {
-    console.log("Sign up");
-
     try {
       if (
         isValidEmail(newUserData.email) &&
@@ -103,6 +101,9 @@ const RegisterModal = (props: any) => {
         value={passwordConfirm}
         onChange={checkPassword}
       />
+      {passwordCheck !== passwordConfirm && passwordConfirm.length > 0 && (
+        <p className="validation-message">Passwords don't match</p>
+      )}
 
       <p className="contact-title">Name: </p>
       <input

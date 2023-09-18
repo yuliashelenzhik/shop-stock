@@ -23,16 +23,6 @@
   .menu {
     display: flex;
     gap: 24px;
-    // & button {
-    //   border-radius: 12px;
-    //   background-color: $light-transp;
-    //   border: none;
-    //   padding: 12px 24px;
-    //   text-transform: uppercase;
-    //   color: $dark;
-    //   font-weight: bold;
-    //   cursor: pointer;
-    // }
   }
   .products-container {
     display: flex;
@@ -51,5 +41,30 @@
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     z-index: 1;
+  }
+}
+
+@media screen and (max-width: 428px) and (max-height: 926px) {
+  .main-screen {
+    padding: 12px;
+    gap: 12px;
+    .logout-btn {
+      top: 12px;
+      right: 12px;
+    }
+    h1 {
+      padding-top: 24px;
+      font-size: 2rem;
+    }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .products-container {
+      flex-direction: column;
+      gap: 12px;
+      padding: 24px 0px;
+    }
   }
 }

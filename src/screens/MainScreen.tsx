@@ -12,19 +12,18 @@ import AddProductModal from "../components/modals/AddProductModal";
 import { showModal } from "../redux/slices/modalSlice";
 import ConfirmRemoveModal from "../components/modals/ConfirmRemoveModal";
 import DefaultButton from "../components/buttons/DefaultButton";
+import DefaultToast from "../components/toasts/DefaultToast";
 
 const MainScreen = () => {
   const { data, isSuccess, isLoading, error } = useGetAllProductsQuery();
   const dispatch = useDispatch();
   const isLogged = localStorage.getItem("authToken") !== null ?? true;
   const [selectedCategory, setSelectedCategory] = useState("all");
-  // const isAuthSelector = useSelector(
-  //   (state: any) => state.auth.isAuthenticated
-  // );
   const isConfirmRemoveOpen = useSelector(
     (state: any) =>
       state.modal.isVisible && state.modal.modal === "ConfirmRemoveModal"
   );
+
   const isLoginModalOpen = useSelector(
     (state: any) => state.modal.isVisible && state.modal.modal === "LoginModal"
   );
@@ -36,6 +35,8 @@ const MainScreen = () => {
     (state: any) =>
       state.modal.isVisible && state.modal.modal === "AddProductModal"
   );
+  const toastSelector = useSelector((state: any) => state.toast);
+  console.log(toastSelector);
 
   useEffect(() => {
     if (!isLogged) {
@@ -70,6 +71,9 @@ const MainScreen = () => {
 
   return (
     <div className="main-screen">
+      {toastSelector.isVisible && (
+        <DefaultToast message={toastSelector.toast} type={"error"} />
+      )}
       {isLoginModalOpen && <LoginModal />}
       {isRegisterModalOpen && <RegisterModal />}
 
@@ -85,7 +89,6 @@ const MainScreen = () => {
           <div className="menu">
             <Categories func={getSelectedCategory} />
             <DefaultButton title="Add a product" onClick={onAddProduct} />
-            {/* <button onClick={onAddProduct}>Add a product</button> */}
           </div>
           <div className="products-container">
             {isLoading ? (

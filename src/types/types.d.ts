@@ -29,6 +29,13 @@ interface ModalState {
   isVisible: boolean;
 }
 
+interface ToastState {
+  toast: string;
+  type: string;
+  message?: string;
+  isVisible: boolean;
+}
+
 interface NewUser {
   email: string;
   username: string;
