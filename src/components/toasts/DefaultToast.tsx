@@ -3,7 +3,7 @@ import "../../styles/toasts.scss";
 
 const DefaultToast = (props: any) => {
   return (
-    <div className={props.type ?? ""}>
+    <div className={props.type}>
       <p>{props.message ?? "Success"}</p>
     </div>
   );

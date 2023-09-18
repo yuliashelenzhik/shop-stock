@@ -20,7 +20,6 @@ const ProductCard = (props: any) => {
   };
 
   const removeItem = () => {
-    console.log(props.product.id);
     dispatch(
       showModal({
         modal: "ConfirmRemoveModal",
@@ -28,7 +27,6 @@ const ProductCard = (props: any) => {
         isVisible: true,
       })
     );
-    console.log("Remove");
   };
 
   return (

@@ -30,10 +30,9 @@ interface ModalState {
 }
 
 interface ToastState {
-  toast: string;
-  type: string;
+  type?: string;
   message?: string;
-  isVisible: boolean;
+  isVisible?: boolean;
 }
 
 interface NewUser {

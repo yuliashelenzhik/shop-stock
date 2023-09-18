@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DefaultModal from "./DefaultModal";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../redux/slices/modalSlice";
 import { useRegisterMutation } from "../../api/api";
+import { showToast, hideToast } from "../../redux/slices/toastSlice";
 
 const RegisterModal = (props: any) => {
   const dispatch = useDispatch();
@@ -36,12 +37,55 @@ const RegisterModal = (props: any) => {
       ) {
         const response = await register(newUserData).unwrap();
         console.log(response);
+        // .then(() => {
+        dispatch(
+          showToast({
+            message: "A new user has been registered. Please log in now",
+            type: "success",
+          })
+        );
+        setTimeout(() => {
+          dispatch(hideToast());
+        }, 5000);
+        // });
+        // if (response) {
+        //   dispatch(
+        //     showToast({
+        //       message: "A new user has been registered. Please log in now",
+        //       type: "success",
+        //     })
+        //   );
+        //   setTimeout(() => {
+        //     dispatch(hideToast());
+        //   }, 5000);
+        // }
+        console.log(response);
+        console.log(newUserData);
         goToLogin();
       } else {
-        console.log("Please correctly fill in the necessary data");
+        console.log(newUserData);
+        // console.log("Please correctly fill in the necessary data");
+        dispatch(
+          showToast({
+            message: "Please correctly fill in the necessary data",
+            type: "error",
+          })
+        );
+        setTimeout(() => {
+          dispatch(hideToast());
+        }, 5000);
       }
     } catch (error) {
-      console.error("Register failed: ", error);
+      console.error(error);
+      dispatch(
+        showToast({
+          message: "There has been an error registering a new user",
+          type: "error",
+        })
+      );
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 5000);
     }
   };
 
@@ -50,14 +94,24 @@ const RegisterModal = (props: any) => {
     dispatch(showModal({ modal: "LoginModal", isVisible: true }));
   };
 
-  const checkPassword = (e: any) => {
-    setPasswordConfirm(e.target.value);
+  useEffect(() => {
     if (passwordCheck === passwordConfirm) {
       setNewUserData({ ...newUserData, password: passwordConfirm });
-    } else {
-      console.log("Passwords are not the same");
     }
-  };
+  }, [passwordCheck, passwordConfirm]);
+
+  // const checkPassword = (e: any) => {
+  //   setPasswordConfirm(e.target.value);
+
+  //   console.log(passwordCheck);
+  //   console.log(passwordConfirm);
+
+  //   if (passwordCheck === passwordConfirm) {
+  //     setNewUserData({ ...newUserData, password: passwordConfirm });
+  //   } else {
+  //     console.log("Passwords are not the same");
+  //   }
+  // };
 
   function isValidEmail(email: string) {
     const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -99,7 +153,7 @@ const RegisterModal = (props: any) => {
         autoComplete="off"
         placeholder="Confirm password*"
         value={passwordConfirm}
-        onChange={checkPassword}
+        onChange={(e) => setPasswordConfirm(e.target.value)}
       />
       {passwordCheck !== passwordConfirm && passwordConfirm.length > 0 && (
         <p className="validation-message">Passwords don't match</p>

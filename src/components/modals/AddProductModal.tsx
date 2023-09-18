@@ -5,6 +5,7 @@ import { useAddProductMutation } from "../../api/api";
 import { useDispatch } from "react-redux";
 import { showModal } from "../../redux/slices/modalSlice";
 import { useGetAllProductsQuery } from "../../api/api";
+import { showToast, hideToast } from "../../redux/slices/toastSlice";
 
 const AddProductModal = (props: any) => {
   const [title, setTitle] = useState("");
@@ -20,13 +21,33 @@ const AddProductModal = (props: any) => {
     try {
       const productData = { title, image, description, category, price };
       const response = await addProduct(productData).unwrap();
-      console.log(response);
-      dispatch(showModal({ modal: "AddProductModal", isVisible: false }));
+      if (response) {
+        dispatch(showModal({ modal: "AddProductModal", isVisible: false }));
+        dispatch(
+          showToast({
+            message: "You've successfully added a new product",
+            type: "success",
+          })
+        );
+
+        setTimeout(() => {
+          dispatch(hideToast());
+        }, 5000);
+      }
       if (data.refetch) {
         await data.refetch();
       }
     } catch (error) {
       console.error("Couln't add new product: ", error);
+      dispatch(
+        showToast({
+          message: "Couldn't add a new product",
+          type: "error",
+        })
+      );
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 5000);
     }
   };
 

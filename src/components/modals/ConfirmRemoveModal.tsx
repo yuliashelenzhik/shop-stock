@@ -4,6 +4,7 @@ import DefaultModal from "./DefaultModal";
 import { useRemoveProductMutation } from "../../api/api";
 import { useDispatch, useSelector } from "react-redux";
 import { showModal } from "../../redux/slices/modalSlice";
+import { hideToast, showToast } from "../../redux/slices/toastSlice";
 
 const ConfirmRemoveModal = (props: any) => {
   const productId = useSelector((state: any) => state.modal.data);
@@ -16,11 +17,30 @@ const ConfirmRemoveModal = (props: any) => {
 
   const handleConfirmRemove = async () => {
     try {
-      const deletedProduct = await removeProduct(productId).unwrap();
-      console.log(`Product ${JSON.stringify(deletedProduct)} has been deleted`);
-      dispatch(showModal({ modal: "ConfirmRemoveModal", isVisible: false }));
+      const response: any = await removeProduct(productId).unwrap();
+      if (response) {
+        dispatch(
+          showToast({
+            message: "The product has been removed",
+            type: "success",
+          })
+        );
+        setTimeout(() => {
+          dispatch(hideToast());
+        }, 5000);
+        dispatch(showModal({ modal: "ConfirmRemoveModal", isVisible: false }));
+      }
     } catch (error) {
-      console.error("Could not delete the product: ", error);
+      console.error(error);
+      dispatch(
+        showToast({
+          message: "There has been a problem removing the product",
+          type: "error",
+        })
+      );
+      setTimeout(() => {
+        dispatch(hideToast());
+      }, 5000);
     }
   };
 

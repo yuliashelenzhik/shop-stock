@@ -11,7 +11,6 @@ const LoginModal = (props: any) => {
   const [password, setPassword] = useState("");
   const [login] = useLoginMutation();
   const dispatch = useDispatch();
-  // const is;
 
   const handleLogin = async () => {
     try {
@@ -22,9 +21,11 @@ const LoginModal = (props: any) => {
       dispatch(showModal({ modal: "LoginModal", isVisible: false }));
     } catch (error) {
       console.error("Login failed: ", error);
-      console.log(error);
       dispatch(
-        showToast({ toast: "Login failed", message: error, type: error })
+        showToast({
+          message: "Login failed, please check your username and password",
+          type: "error",
+        })
       );
       setTimeout(() => {
         dispatch(hideToast());

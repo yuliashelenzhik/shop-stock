@@ -36,7 +36,6 @@ const MainScreen = () => {
       state.modal.isVisible && state.modal.modal === "AddProductModal"
   );
   const toastSelector = useSelector((state: any) => state.toast);
-  console.log(toastSelector);
 
   useEffect(() => {
     if (!isLogged) {
@@ -72,7 +71,11 @@ const MainScreen = () => {
   return (
     <div className="main-screen">
       {toastSelector.isVisible && (
-        <DefaultToast message={toastSelector.toast} type={"error"} />
+        <DefaultToast
+          message={toastSelector.message}
+          type={toastSelector.type}
+          isVisible={toastSelector.isVisible}
+        />
       )}
       {isLoginModalOpen && <LoginModal />}
       {isRegisterModalOpen && <RegisterModal />}
