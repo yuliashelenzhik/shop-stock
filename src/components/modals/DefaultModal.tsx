@@ -21,7 +21,11 @@ const DefaultModal = (props: any) => {
             <button className="ok-btn" onClick={props.onClickOk} type="submit">
               {props.button ?? "Ok"}
             </button>
-            {props.onClickCancel && <button className="ok-btn">Cancel</button>}
+            {props.onClickCancel && (
+              <button className="ok-btn" onClick={props.onClickCancel}>
+                Cancel
+              </button>
+            )}
           </div>
           {props.switchModal && (
             <button className="switch-link" onClick={props.onSwitchModal}>

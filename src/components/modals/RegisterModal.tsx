@@ -25,7 +25,7 @@ const RegisterModal = (props: any) => {
     },
     phone: "",
   });
-  const [register, { isLoading, isError, error, data }] = useRegisterMutation();
+  const [register] = useRegisterMutation();
 
   const handleSignup = async (e: React.FormEvent) => {
     try {
@@ -37,7 +37,6 @@ const RegisterModal = (props: any) => {
       ) {
         const response = await register(newUserData).unwrap();
         console.log(response);
-        // .then(() => {
         dispatch(
           showToast({
             message: "A new user has been registered. Please log in now",
@@ -47,24 +46,8 @@ const RegisterModal = (props: any) => {
         setTimeout(() => {
           dispatch(hideToast());
         }, 5000);
-        // });
-        // if (response) {
-        //   dispatch(
-        //     showToast({
-        //       message: "A new user has been registered. Please log in now",
-        //       type: "success",
-        //     })
-        //   );
-        //   setTimeout(() => {
-        //     dispatch(hideToast());
-        //   }, 5000);
-        // }
-        console.log(response);
-        console.log(newUserData);
         goToLogin();
       } else {
-        console.log(newUserData);
-        // console.log("Please correctly fill in the necessary data");
         dispatch(
           showToast({
             message: "Please correctly fill in the necessary data",
@@ -99,19 +82,6 @@ const RegisterModal = (props: any) => {
       setNewUserData({ ...newUserData, password: passwordConfirm });
     }
   }, [passwordCheck, passwordConfirm]);
-
-  // const checkPassword = (e: any) => {
-  //   setPasswordConfirm(e.target.value);
-
-  //   console.log(passwordCheck);
-  //   console.log(passwordConfirm);
-
-  //   if (passwordCheck === passwordConfirm) {
-  //     setNewUserData({ ...newUserData, password: passwordConfirm });
-  //   } else {
-  //     console.log("Passwords are not the same");
-  //   }
-  // };
 
   function isValidEmail(email: string) {
     const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
